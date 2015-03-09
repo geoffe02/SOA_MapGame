@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20150309042521) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "name",         limit: 255
-    t.integer  "latitude",     limit: 4
-    t.integer  "longitude",    limit: 4
+    t.float    "latitude",     limit: 53
+    t.float    "longitude",    limit: 53
     t.integer  "north_adjoin", limit: 4
     t.integer  "south_adjoin", limit: 4
     t.integer  "east_adjoin",  limit: 4
