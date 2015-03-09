@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  root 'movement#index'
+  get '/north' => 'movement#go_north'
+  get '/south' => 'movement#go_south'
+  get '/east' => 'movement#go_east'
+  get '/west' => 'movement#go_west'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
