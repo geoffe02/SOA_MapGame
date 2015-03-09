@@ -3,7 +3,7 @@ class MovementController < ApplicationController
   require 'json'
 
   def index
-    @location = 0
+    @location = 0 # note: location serves as a kind of "state"
 #    http = Curl.post("http://localhost:3002/map#{@location}")
 #    result = http.body_str
 #    data_hash = JSON.parse(result)
