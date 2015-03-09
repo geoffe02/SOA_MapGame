@@ -1,7 +1,7 @@
 <h1>Listing Map Coordinate Area Detail</h1>
 
 <h2>Import Map</h2>
-<%= form_tag import_mapspace_path, multipart: true do %>
+<%= form_tag import_mapspaces_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Import" %>
 <% end %>
@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-   <% @mapspace.each do |mapspace| %>
+   <% @mapspaces.each do |mapspace| %>
     <tr>
       <td style="text-align: center;"><%= mapspace.location_number %></td>
       <td style="text-align: center;"><%= mapspace.latitude %></td>

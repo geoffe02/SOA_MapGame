@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150309042521) do
 
-  create_table "mapspace", primary_key: "location_number", force: :cascade do |t|
+  create_table "mapspaces", primary_key: "location_number", force: :cascade do |t|
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "name",         limit: 255

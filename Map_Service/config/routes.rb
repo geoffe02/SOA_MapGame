@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root :to =>"mapspace#index"
-  resources :mapspace do
+  root :to =>"mapspaces#index"
+  resources :mapspaces do
    collection { post :import }
   end
 
