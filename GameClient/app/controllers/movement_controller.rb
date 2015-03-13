@@ -2,6 +2,8 @@ class MovementController < ApplicationController
   require 'curb'
   require 'json'
 
+  respond_to :json
+
 #    @location = 0 # note: location serves as a kind of "state"
   def index
     @location = 0 # note: location serves as a kind of "state"
