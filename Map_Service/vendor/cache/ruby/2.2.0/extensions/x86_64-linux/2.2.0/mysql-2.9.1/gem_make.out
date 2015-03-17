@@ -1,0 +1,15 @@
+/home/geoffe02/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20150317-31011-lbjvxj.rb extconf.rb 
+checking for mysql_ssl_set()... yes
+checking for rb_str_set_len()... yes
+checking for rb_thread_start_timer()... no
+checking for mysql.h... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling mysql.c
+linking shared-object mysql/mysql_api.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 mysql_api.so ./.gem.20150317-31011-1qya67c/mysql
