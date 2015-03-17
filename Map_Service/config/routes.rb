@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :directions
   resources :mapspaces do
    collection { post :import }
+   member do 
+    get 'go_north'
+    get 'go_south'
+    get 'go_east'
+    get 'go_west'
+   end
   end
   
 

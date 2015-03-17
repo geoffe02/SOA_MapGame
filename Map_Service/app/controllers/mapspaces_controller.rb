@@ -1,7 +1,7 @@
 class MapspacesController < ApplicationController
   respond_to :json
 
-def index
+  def index
     @mapspaces = Mapspace.all
     render :template => "mapspaces/index"
   end
@@ -15,20 +15,22 @@ def index
     end
   end
 
+# GET /mapspaces/go_north/
   def go_north
-    _present_location = @location
+#    _present_location = @location
+
+    server_receive = http.body_str
+    data_hash = JSON.parse(server_receive)
+    _present_location = data_hash['location']
+    _next_location = _present_location + 1
+
+    http = Curl.post("http://localhost:3000/movement/go_north",
+	"{\present_location\": #{_next_location} }")
+
 #    http = Curl.post("http://localhost:3002/directions",
- #     "{\"present_location\": #{_present_location},\"direction\":\"north\" }"
-
-#    server_reply = http.body_str
-#    data_hash = JSON.parse(server_reply)
-#    _new_location = data_hash['location']
-#    _latitude = data_hash['latitude']
-#    _longitude = data_hash['longitude']
-#    _area_description = data_hash['area']
-
-    render :index
-  end
+#     "{\"present_location\": #{_present_location},\"direction\":\"north\" }"
+#    render :index
+ end
 
   def go_south
     render :index
