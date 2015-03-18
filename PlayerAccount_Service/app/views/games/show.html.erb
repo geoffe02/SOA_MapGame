@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @game.name %>
+</p>
+
+<p>
+  <strong>Num kills:</strong>
+  <%= @game.num_kills %>
+</p>
+
+<p>
+  <strong>Strength level:</strong>
+  <%= @game.strength_level %>
+</p>
+
+<p>
+  <strong>Location number:</strong>
+  <%= @game.location_number %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

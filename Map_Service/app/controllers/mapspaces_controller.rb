@@ -1,11 +1,19 @@
 class MapspacesController < ApplicationController
-  respond_to :json
+  before_action :set_mapspace, only: [:show]
+  respond_to :json, :html
 
   def index
     @mapspaces = Mapspace.all
     render :template => "mapspaces/index"
   end
+
+  # Needed to provide the response action to incoming queries
+  def show
+    @mapspace = Mapspace.find(params[:id])
+    render :template => "mapspaces/show"
+  end
   
+  # Importation of Map Data
   def import
     begin
       Mapspace.import(params[:file])
@@ -17,19 +25,7 @@ class MapspacesController < ApplicationController
 
 # GET /mapspaces/go_north/
   def go_north
-#    _present_location = @location
-
-    server_receive = http.body_str
-    data_hash = JSON.parse(server_receive)
-    _present_location = data_hash['location']
-    _next_location = _present_location + 1
-
-    http = Curl.post("http://localhost:3000/movement/go_north",
-	"{\present_location\": #{_next_location} }")
-
-#    http = Curl.post("http://localhost:3002/directions",
-#     "{\"present_location\": #{_present_location},\"direction\":\"north\" }"
-#    render :index
+    render :index
  end
 
   def go_south
@@ -42,5 +38,20 @@ class MapspacesController < ApplicationController
 
   def go_west
     render :index
+  end
+
+  private
+  # Use of callbacks to setup contraints between actions
+  def set_mapspace
+   @mapspace = Mapspace.find(params[:id])
+  end
+
+  # Allow for use of location_number as row search parameter
+  def to_param
+   location_number
+  end
+
+  def self.find(s)
+   self.find_by_location_number(s)
   end
 end

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  num_kills: 1
+  strength_level: 1
+  location_number: 1
+
+two:
+  name: MyString
+  num_kills: 1
+  strength_level: 1
+  location_number: 1
