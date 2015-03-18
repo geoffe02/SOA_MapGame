@@ -25,19 +25,23 @@ class MapspacesController < ApplicationController
 
 # GET /mapspaces/go_north/
   def go_north
-    render :index
- end
+    @mapspace = Mapspace.find(params[:id])
+    render :template => "mapspaces/go_north"
+  end
 
   def go_south
-    render :index
+    @mapspace = Mapspace.find(params[:id])
+    render :template => "mapspaces/go_south"
   end
 
   def go_east
-    render :index
+    @mapspace = Mapspace.find(params[:id])
+    render :template => "mapspaces/go_east"
   end
 
   def go_west
-    render :index
+    @mapspace = Mapspace.find(params[:id])
+    render :template => "mapspaces/go_west"
   end
 
   private
