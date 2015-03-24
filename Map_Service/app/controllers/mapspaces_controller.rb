@@ -26,7 +26,8 @@ class MapspacesController < ApplicationController
 # GET /mapspaces/go_north/
   def go_north
     @mapspace = Mapspace.find(params[:id])
-    render :template => "mapspaces/go_north"
+#    render :template => "mapspaces/go_north"
+    render json: @mapspace
   end
 
   def go_south

@@ -24,16 +24,16 @@ class MovementController < ApplicationController
  
   def go_north
     _present_location = @location
-    server_reply = Curl.get("http://localhost:3002/mapspaces/#{_present_location}/go_north")
+#    server_reply = Curl.get("http://localhost:3002/mapspaces/#{_present_location}/go_north")
     
-#    server_reply = Net::HTTP.get_response(URI.parse("http://localhost:3002/mapspaces/#{_present_location}/go_north"))
-    payload = server_reply.body_str
+    server_reply = Net::HTTP.get_response(URI.parse("http://localhost:3002/mapspaces/50/go_north"))
+    payload = server_reply.body
 #    @result = JSON.parse(server_reply, :symbolize_names => true)
-    myhash = JSON.parse(payload)
-    @location = myhash['new_location']
-    @message = myhash['name']
-    @latitude = myhash['latitude']
-    @longitude = myhash['longitude']
+#    myhash = JSON.parse(payload)
+    @location = JSON.parse(payload)['new_location']
+    @message = JSON.parse(payload)['name']
+    @latitude = JSON.parse(payload)['latitude']
+    @longitude = JSON.parse(payload)['longitude']
     
     render :index
   end
