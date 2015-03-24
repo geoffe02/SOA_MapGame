@@ -1,32 +1,39 @@
 class MovementController < ApplicationController
   require 'curb'
   require 'json'
+  require 'net/http'
+  require 'uri'
 
 #  respond_to :json
 
-#    @location = 0 # note: location serves as a kind of "state"
+#  $server_reply
+
   def index
-#    @location = 0 # note: location serves as a kind of "state"
-#    http = Curl.post("http://localhost:3002/map#{@location}")
-#    result = http.body_str
-#    data_hash = JSON.parse(result)
-#    message = data_hash['message']
-#    status = data_hash['status']
-#    jsondata = data_hash['jsondata']
-#    @message = message
+    # grab any changes to data_hash
+#    data_hash = JSON.parse($server_reply) 
+#    @location = data_hash['new_location']
+#    @message = data_hash['name']
+#    @latitude = data_hash['latitude']
+#    @longitude = data_hash['longitude']
+  end
+
+  def start_spot
+    @location = 50
+    render :index
   end
  
   def go_north
-    _present_location = 12
-    http = Curl.post("http://localhost:3002/mapspaces/go_north",
-      "{\"present_location\": #{_present_location} }")
-  
-    server_reply = http.body_str
-    data_hash = JSON.parse(server_reply)
-    @location = data_hash['location']
-#    _latitude = data_hash['latitude']
-#    _longitude = data_hash['longitude']
-#    _area_description = data_hash['area']
+    _present_location = @location
+    server_reply = Curl.get("http://localhost:3002/mapspaces/#{_present_location}/go_north")
+    
+#    server_reply = Net::HTTP.get_response(URI.parse("http://localhost:3002/mapspaces/#{_present_location}/go_north"))
+    payload = server_reply.body_str
+#    @result = JSON.parse(server_reply, :symbolize_names => true)
+    myhash = JSON.parse(payload)
+    @location = myhash['new_location']
+    @message = myhash['name']
+    @latitude = myhash['latitude']
+    @longitude = myhash['longitude']
     
     render :index
   end
