@@ -1,40 +1,34 @@
 class MovementController < ApplicationController
-  require 'curb'
   require 'json'
   require 'net/http'
   require 'uri'
 
-#  respond_to :json
-
-#  $server_reply
+  SERVER_BASE_URL = "http://localhost:3002"
+  $current_location = 90 # global variable seen (and updated by) each def
 
   def index
-    # grab any changes to data_hash
-#    data_hash = JSON.parse($server_reply) 
-#    @location = data_hash['new_location']
-#    @message = data_hash['name']
-#    @latitude = data_hash['latitude']
-#    @longitude = data_hash['longitude']
   end
 
-  def start_spot
-    @location = 50
+  def start_spot # Setting Location to an initial value.
+    $current_location = @location
     render :index
   end
  
   def go_north
-    _present_location = @location
-#    server_reply = Curl.get("http://localhost:3002/mapspaces/#{_present_location}/go_north")
+    _present_location = $current_location
+    request_parameters = "mapspaces\/#{_present_location}/go_north"
+    server_request = "#{SERVER_BASE_URL}\/#{request_parameters}"
+#    server_reply = Net::HTTP.get_response(URI.parse("http://localhost:3002/mapspaces/45/go_north"))
     
-    server_reply = Net::HTTP.get_response(URI.parse("http://localhost:3002/mapspaces/50/go_north"))
+    server_reply = Net::HTTP.get_response(URI.parse(server_request))
     payload = server_reply.body
-#    @result = JSON.parse(server_reply, :symbolize_names => true)
-#    myhash = JSON.parse(payload)
-    @location = JSON.parse(payload)['new_location']
+    @location = JSON.parse(payload)['north_adjoin']
     @message = JSON.parse(payload)['name']
     @latitude = JSON.parse(payload)['latitude']
     @longitude = JSON.parse(payload)['longitude']
+#    @longitude = server_request
     
+    $current_location = @location # update to new location
     render :index
   end
 
