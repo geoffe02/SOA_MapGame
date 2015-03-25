@@ -1,11 +1,17 @@
-<h2>Area: <%= @location %></h2>
-<h2>You find yourself <%= @message %></h2>
-<h2>Latitude <%= @latitude %></h2>
-<h2>Longitude <%= @longitude %></h2>
+<h2>Intrepid Explorer</h2>
+<h3>Coordinates:</h3> Lat: <%= @latitude %>, Long: <%= @longitude %>
 
+<h3>Situation</h3>
+You find yourself <%= @message %>.
+You look around and see <%= @monster_name%>
+
+<h4>Area (debug): <%= @location %></h4>
+
+
+<button><%= link_to 'Start', start_path %></button>
 <button><%= link_to 'North', north_path %></button>
 <button><%= link_to 'South', south_path %></button>
 <button><%= link_to 'East', east_path %></button>
 <button><%= link_to 'West', west_path %></button>
-<button><%= link_to 'Start', start_path %></button>
+
 

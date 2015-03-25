@@ -2,15 +2,15 @@ class MonstersController < ApplicationController
   before_action :set_monster, only: [:show, :update, :destroy]
   respond_to :json, :html
 
-  # GET /monsters
-  # GET /monsters.json
   def index
     @monsters = Monster.all
   end
 
-  # GET /monsters/1
-  # GET /monsters/1.json
   def show
+   @monster = Monster.find(params[:id])
+   #render :template => "monsters/show"
+   #render :template => "monsters/show" # Does not work because outputs as HTML
+   render json: @monster
   end
 
   # GET /monsters/new
