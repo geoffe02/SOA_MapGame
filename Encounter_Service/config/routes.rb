@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  root :to =>"monsters#index"
+  resources :monsters do
+   collection { post :import}
+   member do
+    get 'fight'
+    get 'escape'
+   end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Monsters</h1>
+
+<h2>Import Monsters</h2>
+<%= form_tag import_monsters_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Strength</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monsters.each do |monster| %>
+      <tr>
+        <td><%= monster.location %></td>
+        <td><%= monster.name %></td>
+        <td><%= monster.description %></td>
+        <td><%= monster.strength %></td>
+        <td><%= link_to 'Show', monster %></td>
+        <td><%= link_to 'Edit', edit_monster_path(monster) %></td>
+        <td><%= link_to 'Destroy', monster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Monster', new_monster_path %>
