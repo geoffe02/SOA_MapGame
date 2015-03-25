@@ -14,7 +14,10 @@ class MovementController < ApplicationController
     $current_location = 45
     render :index
   end
- 
+  
+  def fight
+  end
+  
   def go_north
     _present_location = $current_location
     request_parameters = "mapspaces\/#{_present_location}/go_north"
@@ -58,6 +61,18 @@ class MovementController < ApplicationController
     @longitude = JSON.parse(payload)['longitude']
     
     $current_location = @location # update to new location
+    
+    # Contact Encounter Service to see if Monsters are present.
+    encounter_location = $current_location
+    encounter_request_parameters = "monsters\/#{encounter_location}"
+    encounter_server_request = "#{ENCOUNTER_SERVER_BASE_URL}\/#{encounter_request_parameters}"
+    
+    encounter_server_reply = Net::HTTP.get_response(URI.parse(encounter_server_request))
+    encounter_payload = encounter_server_reply.body
+    @monster_name = JSON.parse(encounter_payload)['name']
+    @monster_description = JSON.parse(encounter_payload)['description']
+    @monster_strength = JSON.parse(encounter_payload)['strength']
+    
     render :index
   end
   
@@ -74,6 +89,18 @@ class MovementController < ApplicationController
     @longitude = JSON.parse(payload)['longitude']
     
     $current_location = @location # update to new location
+    
+    # Contact Encounter Service to see if Monsters are present.
+    encounter_location = $current_location
+    encounter_request_parameters = "monsters\/#{encounter_location}"
+    encounter_server_request = "#{ENCOUNTER_SERVER_BASE_URL}\/#{encounter_request_parameters}"
+    
+    encounter_server_reply = Net::HTTP.get_response(URI.parse(encounter_server_request))
+    encounter_payload = encounter_server_reply.body
+    @monster_name = JSON.parse(encounter_payload)['name']
+    @monster_description = JSON.parse(encounter_payload)['description']
+    @monster_strength = JSON.parse(encounter_payload)['strength']
+    
     render :index
   end
  
@@ -90,6 +117,20 @@ class MovementController < ApplicationController
     @longitude = JSON.parse(payload)['longitude']
     
     $current_location = @location # update to new location
+    
+    # Contact Encounter Service to see if Monsters are present.
+    encounter_location = $current_location
+    encounter_request_parameters = "monsters\/#{encounter_location}"
+    encounter_server_request = "#{ENCOUNTER_SERVER_BASE_URL}\/#{encounter_request_parameters}"
+    
+    encounter_server_reply = Net::HTTP.get_response(URI.parse(encounter_server_request))
+    encounter_payload = encounter_server_reply.body
+    @monster_name = JSON.parse(encounter_payload)['name']
+    @monster_description = JSON.parse(encounter_payload)['description']
+    @monster_strength = JSON.parse(encounter_payload)['strength']
+    
     render :index
   end
+  
+
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/east' => 'movement#go_east'
   get '/west' => 'movement#go_west'
   get '/start' => 'movement#start_spot'
+  get '/fight' => 'movement#fight'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -2,16 +2,19 @@
 <h3>Coordinates:</h3> Lat: <%= @latitude %>, Long: <%= @longitude %>
 
 <h3>Situation</h3>
-You find yourself <%= @message %>.
-You look around and see <%= @monster_name%>
+<p>You find yourself <%= @message %>.</p>
+<p>You look around and see <%= @monster_name%></p>
+<p><%= @monster_description%></p>
 
-<h4>Area (debug): <%= @location %></h4>
-
-
+<h3>Choose Action</h3>
 <button><%= link_to 'Start', start_path %></button>
-<button><%= link_to 'North', north_path %></button>
-<button><%= link_to 'South', south_path %></button>
-<button><%= link_to 'East', east_path %></button>
-<button><%= link_to 'West', west_path %></button>
+<button><%= link_to 'Go North', north_path %></button>
+<button><%= link_to 'Go South', south_path %></button>
+<button><%= link_to 'Go East', east_path %></button>
+<button><%= link_to 'Go West', west_path %></button>
+
+<h4>Debug Area:</h4> 
+<p>Location: <%= @location %></p>
+<p>Monster Strength: <%= @monster_strength %></p>
 
 
