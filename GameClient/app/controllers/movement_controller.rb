@@ -19,6 +19,7 @@ class MovementController < ApplicationController
   end
   
   def go_north
+    begin # a Try-Catch to detect error in non-functioning service
     _present_location = $current_location
     request_parameters = "mapspaces\/#{_present_location}/go_north"
     server_request = "#{SERVER_BASE_URL}\/#{request_parameters}"
@@ -46,9 +47,14 @@ class MovementController < ApplicationController
     
     
     render :index
+    
+    rescue
+      redirect_to root_path, notice: "Service(s) Down. Check to see if online."
+    end
   end
 
   def go_south
+    begin # a Try-Catch to detect error in non-functioning service
     _present_location = $current_location
     request_parameters = "mapspaces\/#{_present_location}/go_south"
     server_request = "#{SERVER_BASE_URL}\/#{request_parameters}"
@@ -74,9 +80,13 @@ class MovementController < ApplicationController
     @monster_strength = JSON.parse(encounter_payload)['strength']
     
     render :index
+  rescue
+    redirect_to root_path, notice: "Service(s) Down. Check to see if online."
+  end
   end
   
   def go_east
+    begin # a Try-Catch to detect error in non-functioning service
     _present_location = $current_location
     request_parameters = "mapspaces\/#{_present_location}/go_east"
     server_request = "#{SERVER_BASE_URL}\/#{request_parameters}"
@@ -102,9 +112,13 @@ class MovementController < ApplicationController
     @monster_strength = JSON.parse(encounter_payload)['strength']
     
     render :index
+  rescue
+    redirect_to root_path, notice: "Service(s) Down. Check to see if online."
+  end
   end
  
   def go_west
+    begin # a Try-Catch to detect error in non-functioning service
     _present_location = $current_location
     request_parameters = "mapspaces\/#{_present_location}/go_west"
     server_request = "#{SERVER_BASE_URL}\/#{request_parameters}"
@@ -130,6 +144,9 @@ class MovementController < ApplicationController
     @monster_strength = JSON.parse(encounter_payload)['strength']
     
     render :index
+  rescue
+    redirect_to root_path, notice: "Service(s) Down. Check to see if online."
+  end
   end
   
 
